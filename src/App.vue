@@ -6,7 +6,7 @@
       <p class="sub_txt">Vue로 작업한 다양한 UI 케이스입니다.</p>
 
       <ul class="menu">
-        <li><router-link to="/Like">Like</router-link></li>
+        <li v-for="item in menuList" :key="item.index"><router-link :to="item.routeLink">{{item.name}}</router-link></li>
       </ul>
     </div>
     <div class="content">
@@ -20,7 +20,20 @@
 export default {
   name: 'App',
   components: {
-  
+  },
+  data() {
+    return{
+        menuList: [
+            {
+                name : 'Like',
+                routeLink : '/like-view'
+            },
+            {
+                name : 'Deep Test',
+                routeLink : '/deep-test-view'
+            }
+        ]
+    }
   }
 }
 </script>

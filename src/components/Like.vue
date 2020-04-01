@@ -4,13 +4,13 @@
       <div class="user_thumb" v-for="user in userList.slice(0,`${maxIndex}`)" :key="user.index">
         <img :src="user.photo" :alt="`${user.name} 프로필 사진`">
       </div>
-      <span v-show="userList.length>maxIndex">외 {{totalLikeNum-maxIndex}}명</span>
+      <span v-show="userList.length>maxIndex">외 {{userList.length-maxIndex}}명</span>
     </div>
 
     <div class="count_info">
         <button type="button" class="btn like_off" v-show="!likeStatus" @click="changeStatus()">좋아요</button>
         <button type="button" class="btn like_on" v-show="likeStatus" @click="changeStatus()">좋아요 취소</button>
-        <span class="num">{{totalLikeNum}}</span>
+        <span class="num">{{userList.length}}</span>
     </div>
   </div>
 </template>
@@ -22,7 +22,7 @@ export default {
     return {
       likeStatus: false,
       maxIndex: 3,
-      totalLikeNum: 4,
+      myInfo : {name: '나다', photo: 'images/img_user1.png'},
       userList: [
         {
           name: '브라운',
@@ -47,10 +47,13 @@ export default {
     changeStatus() {
       this.likeStatus=!this.likeStatus;
 
-      if(this.likeStatus){
-        this.totalLikeNum = this.totalLikeNum+1;
+      if(this.likeStatus){ //좋아요를 누른다면,
+        this.userList.push(this.myInfo);
       }else{
-        this.totalLikeNum = this.totalLikeNum-1;
+        let myIndex = this.userList.indexOf(this.myInfo);
+        if(myIndex>-1){//좋아요 취소한다면,
+          this.userList.splice(myIndex,1);
+        }
       }
     }
   }
