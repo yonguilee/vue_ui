@@ -31,6 +31,10 @@ export default {
             {
                 name : 'Deep Test',
                 routeLink : '/deep-test-view'
+            },
+            {
+                name : 'Write Form',
+                routeLink : '/write-form-view'
             }
         ]
     }
